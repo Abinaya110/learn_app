@@ -1,0 +1,15 @@
+.Reg {
+    background-color: rgb(193, 233, 247);
+    font-family: 'Times New Roman', Times, serif;
+    margin: center;
+    margin-left: 38%;
+    margin-right: 38%;
+    margin-top: 10%;
+    padding: center;
+    border-radius: 5%;
+  }
+
+  .form{
+    text-align: center;
+    
+  }
