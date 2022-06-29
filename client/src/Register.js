@@ -30,7 +30,7 @@ function Register() {
    }
    else{
     console.log("passwoed matched")
-    fetch(`http://192.168.1.127:5000/register`,{
+    fetch(`http://localhost:5000/register`,{
       method: "POST",
         headers: {
           "Content-Type": "application/json",
