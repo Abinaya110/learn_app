@@ -1,77 +1,51 @@
 import React, { useState } from "react";
 import "./Register.css";
 import Button from "@mui/material/Button";
-import { Link, useNavigate } from "react-router-dom";
 import Home from "./Home";
+import { Link, useNavigate } from "react-router-dom";
 
-function Register() {
-  const [name, setName] = useState("");
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirm, setConfirm] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!name) {
-      alert("No name");
-    } else if (!email) {
+
+    if (!email) {
       alert("No email");
     } else if (!password) {
       alert("No password");
-    } else if (!confirm) {
-      alert("No confirm password");
-    } else if (password !== confirm) {
-      alert("Password mismatch");
     } else {
-      console.log("Password matched");
-
-      fetch(`http://localhost:5000/register`, {
+      console.log("Welcome user");
+      fetch(`http://localhost:5000/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: name,
           email: email,
           password: password,
         }),
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
-          console.log("done");
-          alert("Successfully Registered!!!");
-          navigate("/login");
+          console.log("Login Success");
+          alert("Login Successfully!!!");
+          navigate("/mypage");
         })
         .catch((err) => console.error(err));
     }
   };
 
-  function onChange(value) {
-    console.log("Captcha value:", value);
-  }
-
   return (
     <div>
       <Home />
-
       <div className="Reg">
         <br />
-        <h3 style={{ color: "#9C27B0" }}>REGISTRATION FORM</h3>
+        <h3 style={{ color: "#9C27B0" }}>LOGIN PAGE</h3>
         <form className="form">
-          <label>Name: </label>
-          <br />
-          <input
-            type="text"
-            placeholder="Enter name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          ></input>
-          <br />
-          <br />
-
-          <label>Email: </label>
+          <label>Email id: </label>
           <br />
           <input
             type="email"
@@ -93,17 +67,6 @@ function Register() {
           <br />
           <br />
 
-          <label>Confirm Password: </label>
-          <br />
-          <input
-            type="password"
-            placeholder="Confirm password"
-            value={confirm}
-            onChange={(e) => setConfirm(e.target.value)}
-          ></input>
-          <br />
-          <br />
-
           <Button
             size="small"
             color="secondary"
@@ -114,10 +77,9 @@ function Register() {
           </Button>
           <br />
           <br />
-
           <span style={{ fontStyle: "italic" }}>
-            Already an user?
-            <Link to="/login"> Login</Link>
+            New user?
+            <Link to="/register"> Register</Link>
             <br />
             <br />
           </span>
@@ -127,4 +89,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Login;
