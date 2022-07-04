@@ -29,7 +29,7 @@ function Register() {
     alert(" password mismatch")
    }
    else{
-    console.log("passwoed matched")
+    console.log("passwoed matched",email)
     fetch(`http://localhost:5000/register`,{
       method: "POST",
         headers: {

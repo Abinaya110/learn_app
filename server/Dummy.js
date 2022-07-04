@@ -1,43 +1,48 @@
-const express = require("express")
-const app=express()
+
+
+const express=require("express")
+const app= express()
+const { mongoose } = require("mongoose")
 const User=require("./Userschema")
-const dburl="mongodb+srv://myapp:myapp@myapp.36tsc.mongodb.net/?retryWrites=true&w=majority"
-const mongoose = require("mongoose")
-mongoose.connect(dburl)
-.then(()=>{ console.log("mongoose.connected")})
-.catch((err)=>{console.log("anu",err)})
+const aurl="mongodb+srv://myapp:myapp@myapp.36tsc.mongodb.net/test"
+const bodyparser=require("body-parser")
+const cors=require("cors")
+const bcrypt=require("bcrypt")
 
-app.get("/",async(req,res)=>{
+app.use(bodyparser.json())
+app.use(cors())
 
-let name = "abi";
-let password="12345";
-let email="abi@gmail.com";
-let age=30;
-let check =  await User.findOne({email:email})
-console.log("check",check)
-if(!check){
-   let user=new User({
-      name:name,
-      password:password,
-      email:email,
-      age:age,
+
+
+
+mongoose.connect(aurl)
+.then(()=>{console.log("mongoose connected")})
+.catch((err)=>{console.log("err",err)})
+
+app.post("/register",async(req,res)=>{
+   console.log(req.body.email)
+var registercheck=await User.findOne({email:req.body.email})
+console.log("hdkjf",registercheck)
+if (registercheck){
+   console.log("already exsit")
+   res.json({"result":"user already exsit"})
+}
+else{
+   let newpassword=await bcrypt.hash(req.body.password,12)
+   console.log(newpassword)
+     let user=new User({
+      name: req.body.name,
+      password:newpassword,
+      email:req.body.email,
       });
-
-
-
    user.save()
    .then((data)=>{res.send(data)})
    .catch((err)=>{console.log(err)})
 
+}
 
-   }
-   else{
-      res.send("user already exist")
-   }
- 
-   })  
 
- 
+})
 
 
 
@@ -58,6 +63,6 @@ if(!check){
 
 
 
-app.listen(5000,()=>{
-    console.log("listerning at 5000")
+app.listen (5000,()=>{
+   console.log("listerning at 5000")
 })
