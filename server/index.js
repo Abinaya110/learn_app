@@ -31,13 +31,6 @@ app.post("/addmovies/:name", (req, res) => {
   let boxoffice = req.body.boxoffice;
 
 
-
-
-
-
-
-
-
   // let {name,year,cast,director,music,boxoffice}=req.body
 
   let movie = new Movie({
