@@ -40,7 +40,7 @@ function Login() {
 
   return (
     <div>
-      <Home />
+      {/* <Home /> */}
       <div className="Reg">
         <br />
         <h3 style={{ color: "#9C27B0" }}>LOGIN PAGE</h3>

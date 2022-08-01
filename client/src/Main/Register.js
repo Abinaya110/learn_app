@@ -7,6 +7,7 @@ import Home from "./Home";
 function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [age, setAge] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const navigate = useNavigate();
@@ -14,13 +15,16 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name) {
-      alert("No name");
+      alert("Name Required!");
     } else if (!email) {
       alert("No email");
-    } else if (!password) {
-      alert("No password");
+    } else if (!age) {
+      alert("Age Required!");
+    }
+    else if (!password) {
+      alert("No password!");
     } else if (!confirm) {
-      alert("No confirm password");
+      alert("No confirm password!");
     } else if (password !== confirm) {
       alert("Password mismatch");
     } else {
@@ -34,6 +38,7 @@ function Register() {
         body: JSON.stringify({
           name: name,
           email: email,
+          age:age,
           password: password,
         }),
       })
@@ -48,13 +53,11 @@ function Register() {
     }
   };
 
-  function onChange(value) {
-    console.log("Captcha value:", value);
-  }
+
 
   return (
     <div>
-      <Home />
+      {/* <Home /> */}
 
       <div className="Reg">
         <br />
@@ -78,6 +81,17 @@ function Register() {
             placeholder="Email id"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+          ></input>
+          <br />
+          <br />
+
+          <label>Age: </label>
+          <br />
+          <input
+           
+            placeholder="Enter your Age"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
           ></input>
           <br />
           <br />
