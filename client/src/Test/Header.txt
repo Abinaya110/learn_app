@@ -1,0 +1,37 @@
+// import dependencies
+import React from "react";
+import Testercode from "../Testercode/Testercode";
+// import API mocking utilities from Mock Service Worker
+
+// import react-testing methods
+import { render, fireEvent, waitFor, screen } from "@testing-library/react";
+import userEvent from '@testing-library/user-event'
+
+// add custom jest matchers from jest-dom
+import "@testing-library/jest-dom";
+// the component to test
+
+test("outer page ", async () => {
+  render(<Testercode />);
+  const title = screen.getByText(/Testercode/);
+  expect(title).toBeInTheDocument();
+
+  const name = screen.getByLabelText("name:");
+  const age = screen.getByLabelText("age:");
+  const id = screen.getByLabelText("id:");
+  // // fireEvent.change(name,{target:{value:"user@test.com"}});3
+  // // fireEvent.change(password,{target:{value:"Test1234"}});
+
+
+  await  userEvent.type(name, "mugilan@gmail.com");
+  await  userEvent.type(age, "20");
+  await  userEvent.type(id, "1");
+
+  expect(name.value).toBe("mugilan@gmail.com")
+  expect(age.value).toBe("20")  
+  expect(id.value).toBe("1")
+
+
+
+});
+
