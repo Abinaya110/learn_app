@@ -44,6 +44,7 @@ function Login() {
       <div className="Reg">
         <br />
         <h3 style={{ color: "#9C27B0" }}>LOGIN PAGE</h3>
+        <br/>
         <form className="form">
           <label>Email id: </label>
           <br />

@@ -23,8 +23,6 @@ export default function Home() {
 
   return (
     <div>
-      <section className="scene">
-      {/* <div className="sun"></div> */}
       <div className="bg"></div>
      <div style={{ paddingTop: "15%" }}> 
       {/* <Menuside/> */}
@@ -64,7 +62,6 @@ export default function Home() {
        </div>
        </div>
     
-    </section>
     </div>
   );
 }
