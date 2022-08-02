@@ -2,25 +2,33 @@ import React, { useState } from "react";
 import "./Register.css";
 import Button from "@mui/material/Button";
 import { Link, useNavigate } from "react-router-dom";
-import Home from "./Home";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import { Snackbar } from "@material-ui/core";
 
 function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [age, setAge] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
+  const [open, setOpen] = useState(false);
+  const vertical = "bottom";
+  const horizontal = "center";
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name) {
-      alert("No name");
+      alert("Name Required!");
     } else if (!email) {
       alert("No email");
+    } else if (!age) {
+      alert("Age Required!");
     } else if (!password) {
-      alert("No password");
+      alert("No password!");
     } else if (!confirm) {
-      alert("No confirm password");
+      alert("No confirm password!");
     } else if (password !== confirm) {
       alert("Password mismatch");
     } else {
@@ -34,13 +42,18 @@ function Register() {
         body: JSON.stringify({
           name: name,
           email: email,
+          age: age,
           password: password,
         }),
       })
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-          console.log("done");
+          console.log("Account created");
+          // setOpen(true);
+          // window.setTimeout(() => {
+          //   navigate("/login");
+          // }, 5000);
           alert("Successfully Registered!!!");
           navigate("/login");
         })
@@ -48,14 +61,15 @@ function Register() {
     }
   };
 
-  function onChange(value) {
-    console.log("Captcha value:", value);
-  }
+  // const handleClose = (event, reason) => {
+  //   if (reason === "clickaway") {
+  //     return;
+  //   }
+  //   setOpen(false);
+  // };
 
   return (
     <div>
-      <Home />
-
       <div className="Reg">
         <br />
         <h3 style={{ color: "#9C27B0" }}>REGISTRATION FORM</h3>
@@ -78,6 +92,16 @@ function Register() {
             placeholder="Email id"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+          ></input>
+          <br />
+          <br />
+
+          <label>Age: </label>
+          <br />
+          <input
+            placeholder="Enter your Age"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
           ></input>
           <br />
           <br />
@@ -122,6 +146,18 @@ function Register() {
             <br />
           </span>
         </form>
+        {/* <Snackbar
+          open={open}
+          sx={{ width: "100%" }}
+          spacing={2}
+          autoHideDuration={5000}
+          anchorOrigin={{ vertical, horizontal }}
+        >
+          <Alert onClose={handleClose} severity="success" color="info">
+            <AlertTitle>Successfully Registered!</AlertTitle>
+            Now, Login to your account
+          </Alert>
+        </Snackbar> */}
       </div>
     </div>
   );
