@@ -1,7 +1,7 @@
 import './App.css';
 import RouterComponent from './Main/RouterComponent';
 // import Endpage from './Testercode/Endpage';
-import Modalpage from './Testercode/Modalpage';
+// import Modalpage from './Testercode/Modalpage';
 
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <div className="App" style={{marginLeft:"100px",marginTop:"100px"}}>
 
 
-     <Modalpage/>
+     <RouterComponent/>
     </div>
   );
 }

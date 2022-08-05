@@ -65,7 +65,7 @@ app.post("/login", async (req, res) => {
   } else {
     let match = await bcrypt.compare(req.body.password, checkemail.password);
     console.log(match);
-    res.json({ result: `passmord ${match}` });
+    res.json({ result: `password ${match}` });
   }
 });
 //login user/////////////////////
